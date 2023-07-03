@@ -21,6 +21,7 @@ done < "$faulty_packages_file"
 # Compare the packages and print the common ones
 for package in "${all_packages[@]}"; do
     if [[ ${faulty_packages["$package"]} ]]; then
-        echo "$package"
+        echo "Remove faulty package: $package"
+        sudo apt-get remove --yes "$package"
     fi
 done
