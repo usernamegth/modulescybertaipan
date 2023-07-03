@@ -5,7 +5,7 @@ all_packages_file="all_packages.txt"
 faulty_packages_file="faulty_packages.txt"
 
 # Retrieve the list of all apt packages and save them to all_packages.txt
-dpkg -l | awk '/^ii/ {print $2}' > "$all_packages_file"
+dpkg-query -W -f='${Package}\n' > "$all_packages_file"
 
 # Read all packages into an array
 mapfile -t all_packages < "$all_packages_file"
