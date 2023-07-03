@@ -1,6 +1,6 @@
 #!/bin/bash
 # Gets the packages
-wget https://raw.githubusercontent.com/usernamegth/modulescybertaipan/main/packages.txt && chmod 777 packages.txt
+wget https://raw.githubusercontent.com/usernamegth/modulescybertaipan/main/packages.txt && chmod a+r packages.txt
 
 # Define the paths to the input files
 all_packages_file="all_packages.txt"
