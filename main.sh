@@ -2,7 +2,7 @@
 
 # Define the paths to the input files
 all_packages_file="all_packages.txt"
-faulty_packages_file="faulty_packages.txt"
+faulty_packages_file="packages.txt"
 
 # Retrieve the list of all apt packages and save them to all_packages.txt
 dpkg-query -W -f='${Package}\n' > "$all_packages_file"
