@@ -13,9 +13,9 @@ while IFS= read -r package || [[ -n "$package" ]]; do
     faulty_packages["$package"]=1
 done < "$faulty_packages_file"
 
-# Compare the packages and print the faulty ones
+# Compare the packages and print the common ones
 for package in "${all_packages[@]}"; do
-    if [[ ${faulty_packages["$package"]} == 1 ]]; then
-        echo "Remove faulty package: $package"
+    if [[ ${faulty_packages["$package"]} ]]; then
+        echo "$package"
     fi
 done
