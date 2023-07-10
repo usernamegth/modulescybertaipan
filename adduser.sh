@@ -1,4 +1,4 @@
-rm currentusers.txt | rm diff.txt 
+rm -f currentusers.txt | rm -f diff.txt
 awk -F: '$3>=1000{print $1}' /etc/passwd >> currentusers.txt
 sort currentusers.txt | sort users.txt
 diff --ignore-all-space currentusers.txt users.txt > diff.txt
