@@ -1,27 +1,10 @@
 #!/bin/bash
-# Gets the packages
-wget https://raw.githubusercontent.com/usernamegth/modulescybertaipan/main/packages.txt && chmod a+r packages.txt
 
-# Define the paths to the input files
-all_packages_file="all_packages.txt"
-faulty_packages_file="packages.txt"
+wget https://raw.githubusercontent.com/usernamegth/modulescybertaipan/main/packages.txt && chmod a+r packages.txt ; sort packages.txt
 
-# Retrieve the list of all apt packages and save them to all_packages.txt
-dpkg-query -W -f='${Package}\n' > "$all_packages_file"
-
-# Read all packages into an array
-mapfile -t all_packages < "$all_packages_file"
-
-# Read faulty packages into an associative array
-declare -A faulty_packages
-while IFS= read -r package || [[ -n "$package" ]]; do
-    faulty_packages["$package"]=1
-done < "$faulty_packages_file"
-
-# Compare the packages and print the common ones
-for package in "${all_packages[@]}"; do
-    if [[ ${faulty_packages["$package"]} ]]; then
-        echo "Remove faulty package: $package"
-        sudo apt-get remove --yes "$package"
-    fi
-done
+dpkg -l | awk '/^ii/ {print $2}' > current.txt ; sort current.txt
+sed -i 's/install//g' packages.txt ; sed -i 's/ //g packages.txt'
+diff current.txt packages.txt >> packdiff.txt
+sed -i '/</d' packdiff.txt ; sed -i '/>/d' packdiff.txt ; sed -i 's/ //g' packdiff.txt ; sed -i '/^[0-9]/d' packdiff.txt 
+for package in $(cat packdiff.txt); do 
+sudo apt-get remove --yes "$package" 
