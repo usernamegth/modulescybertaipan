@@ -7,7 +7,7 @@ while [ -e "$filename" ]; do
   filename="script_output_$counter.log"
 done
 
-output=$(chmod +x user.sh 2>&1)
+output=$(/home/ubuntu/Desktop/user.sh 2>&1)
 echo "$output" | tee "$filename"
 
 echo "Log file created: $filename"
