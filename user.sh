@@ -1,3 +1,4 @@
+#!/bin/bash
 # SECTION 1 
 # Deleting and adding users
 rm -f currentusers.txt | rm -f diff.txt | rm -f diff2.txt 
