@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# Execute your script and capture output and errors
+counter=0
+filename="script_output_$counter.log"
+
+while [ -e "$filename" ]; do
+  ((counter++))
+  filename="script_output_$counter.log"
+done
+
 output=$(script.sh 2>&1)
+echo "$output" | tee "$filename"
 
-# Save output to a log file
-echo "$output" | tee script_output.log
+discord_webhook_url="https://discord.com/api/webhooks/your_webhook_url"
 
-# Define the Discord webhook URL
-discord_webhook_url="https://discord.com/api/webhooks/1128179682962051154/RwyOXVetShqlROIJ4kfwv3ynPGMt6jRc7I453Q6zdt5YOFK-LGpWM6EhAESKGRGgOouJ"
-
-# Send output to Discord channel
 curl -X POST -H "Content-Type: application/json" -d '{"content": "```'"$output"'```"}' "$discord_webhook_url"
+
