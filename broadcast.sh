@@ -4,16 +4,17 @@ counter=0
 filename="script_output_$counter.log"
 
 while [ -e "$filename" ]; do
-  ((counter++))
+  counter=$((counter+1))
   filename="script_output_$counter.log"
 done
 
-output=$(user.sh 2>&1)
+output=$(script.sh 2>&1)
 echo "$output" | tee "$filename"
 
-echo "Logs have been saved to: $filename"
+echo "Log file created: $filename"
 
 discord_webhook_url="https://discord.com/api/webhooks/1128179682962051154/RwyOXVetShqlROIJ4kfwv3ynPGMt6jRc7I453Q6zdt5YOFK-LGpWM6EhAESKGRGgOouJ"
 
 curl -X POST -H "Content-Type: application/json" -d '{"content": "```'"$output"'```"}' "$discord_webhook_url"
+
 
