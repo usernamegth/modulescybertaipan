@@ -8,7 +8,7 @@ while [ -e "$filename" ]; do
   filename="script_output_$counter.log"
 done
 
-output=$(script.sh 2>&1)
+output=$(user.sh 2>&1)
 echo "$output" | tee "$filename"
 
 echo "Logs have been saved to: $filename"
