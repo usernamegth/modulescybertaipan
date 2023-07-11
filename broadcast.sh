@@ -1,24 +1,4 @@
 #!/bin/bash
-
-# Check if curl is installed
-if ! command -v curl &> /dev/null; then
-  echo "curl command not found. Installing curl..."
-  
-  # Install curl
-  if [[ "$(uname)" == "Linux" ]]; then
-    # Debian/Ubuntu
-    if [[ -x "$(command -v apt-get)" ]]; then
-      sudo apt-get update
-      sudo apt-get install -y curl
-    fi
-
-    # CentOS/Fedora
-    if [[ -x "$(command -v yum)" ]]; then
-      sudo yum update
-      sudo yum install -y curl
-    fi
-  fi
-
 counter=0
 filename="script_output_$counter.log"
 
