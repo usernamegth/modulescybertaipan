@@ -14,11 +14,10 @@ done
 # SECTION 2
 # Changing users passwords
 awk -F: '$3>=1000{print $1}' /etc/passwd >> newcurrentusers.txt
-sed '/ubuntu/!d' newcurrentusers.txt 
+sed '/ubuntu/d' newcurrentusers.txt 
 password = "CyberTaipan123!"
 for i in $(cat newcurrentusers.txt); do 
 echo '$i:$password' | sudo chpasswd 
-
 
 
 
